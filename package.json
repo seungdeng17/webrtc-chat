@@ -1,0 +1,26 @@
+{
+  "name": "webrtc-chat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "client": "cd client && yarn start",
+    "server": "cd server && yarn start",
+    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seungdeng17/webrtc-chat.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/seungdeng17/webrtc-chat/issues"
+  },
+  "homepage": "https://github.com/seungdeng17/webrtc-chat#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "concurrently": "^6.2.0"
+  }
+}

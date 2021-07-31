@@ -1,0 +1,13 @@
+.vscode
+node_modules
+dist
+build
+storybook-static
+yarn.lock
+yarn-error.log
+package-lock.json
+package-error.log
+
+.env
+.env.production
+.env.development
