@@ -11,3 +11,5 @@ package-error.log
 .env
 .env.production
 .env.development
+
+cert
