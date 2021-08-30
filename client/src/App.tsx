@@ -49,10 +49,10 @@ export default function App() {
 
   useEffect(() => {
     socket.current = io('http://localhost:8000');
-    socket.current.on('setMyId', (myId: string) => setMyId(myId));
+    socket.current.on('set-my-id', (myId: string) => setMyId(myId));
     socket.current.on('users', (users: any[]) => setUsers(users));
 
-    socket.current.on('sendOfferToCallee', async ({ caller, offer }: { [key: string]: any }) => {
+    socket.current.on('send-offer-to-callee', async ({ caller, offer }: { [key: string]: any }) => {
       if (offer) {
         setOffer(offer);
         setCaller(caller);
@@ -60,13 +60,13 @@ export default function App() {
       }
     });
 
-    socket.current.on('sendAnswerToCaller', async ({ answer }: { [key: string]: any }) => {
+    socket.current.on('send-answer-to-caller', async ({ answer }: { [key: string]: any }) => {
       if (answer) {
         await myPeer.current.setRemoteDescription(new RTCSessionDescription(answer));
       }
     });
 
-    socket.current.on('sendCandidateToTarget', async ({ candidate }: { [key: string]: any }) => {
+    socket.current.on('send-candidate-to-target', async ({ candidate }: { [key: string]: any }) => {
       if (candidate) {
         try {
           await myPeer.current.addIceCandidate(candidate);

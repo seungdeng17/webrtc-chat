@@ -26,17 +26,24 @@ io.on('connection', (socket) => {
   const socketId = socket.id;
   if (!users.has(socketId)) users.set(socketId, socketId);
 
-  socket.emit('setMyId', socketId);
+  socket.emit('set-my-id', socketId);
   io.sockets.emit('users', [...users.values()]);
 
   // sdp
-  socket.on('offer', ({ callee, offer }) => io.to(callee).emit('sendOfferToCallee', { caller: socketId, offer }));
-  socket.on('answer', ({ caller, answer }) => io.to(caller).emit('sendAnswerToCaller', { answer }));
+  socket.on('offer', ({ callee, offer }) => {
+    console.log('offer: ', offer);
+    io.to(callee).emit('send-offer-to-callee', { caller: socketId, offer });
+  });
+  socket.on('answer', ({ caller, answer }) => {
+    console.log('answer: ', answer);
+    io.to(caller).emit('send-answer-to-caller', { answer });
+  });
 
   // ice candidate
   socket.on('new-ice-candidate', async ({ target, candidate }) => {
     if (candidate) {
-      io.to(target).emit('sendCandidateToTarget', { candidate });
+      console.log('candidate: ', candidate);
+      io.to(target).emit('send-candidate-to-target', { candidate });
     }
   });
 
